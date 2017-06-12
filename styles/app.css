@@ -1,0 +1,14 @@
+/* DEBUGGING*/
+.bg-red { background-color:red;}
+.bg-green { background-color:green;}
+.bg-blue { background-color:blue;}
+.bg-grey { background-color:grey;}
+.bg-pink { background-color:pink;}
+.bg-salmon { background-color:salmon;}
+.bg-white { background-color:white;}
+.bg-black { background-color:black;}
+.bg-game {background-color: #fff2e6;}
+
+#tabsContent{
+  height: 600px;
+}

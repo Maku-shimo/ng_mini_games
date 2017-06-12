@@ -1,143 +1,69 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>    
-		<link href="style.css" rel="stylesheet" type="text/css">	
-		<script src="jquery-3.1.1.js"></script>
-		<script src="angular.min.js"></script>
-		<script src="app.js"></script >
-		<title>Games</title>
-	</head>
-	<body ng-app="makushimoGames">
-		<div class="container" ng-controller="mainController as mainCtrl">
-			<ul id="tabs">
-				<li data-tab='tab1'>Черное и белое</li>
-				<li data-tab='tab2'>Добро и зло</li>
-			</ul>
-			<div id="tabsContent" >
-				
-				<!-- GAME Black & White -->
-				<div data-tab='tab1'id="BW" ng-controller="game1Controller as game1">
-					<div id="row1"  class="flex-container">
-						
-						<div id="left" class="col flex-container flex-column flex-align-center flex-justify-around">						
-							<table>
-								<tr>
-									<td>Верно</td>
-									<td>{{game1.correctCount}}</td>
-								</tr>
-								<tr>
-									<td>Не верно</td>
-									<td>{{game1.uncorrectCount}}</td>
-								</tr>
-								<tr>
-									<td>Результат &nbsp &nbsp </td>
-									<td>{{game1.resultCount}}</td>
-								</tr>
-							</table>
-							<div id="guess">Угадай, какой цвет сейчас будет.</div>
-						</div>
-						
-						<div id="center" class="col flex-container flex-column flex-align-center flex-justify-around">
-							<div id="used">{{game1.used}}</div>
-							<div id="result" ng-click="game1.resultClick();">
-								<div>{{game1.result}}</div>
-								<div id="rightWrong" ng-show="game1.rightWrong != ''">
-									<img ng-src="{{game1.rightWrong}}">
-								</div>
-							</div>
-							
-						</div>
-						
-						<div id="right" class="col flex-container flex-column flex-align-center flex-justify-around">
-							<div>
-								<label for="atepmpts">Всего попыток
-									<input id="atempts" class="number" type="number" ng-change="game1.atemptsOnChange();" ng-model="game1.atempts" ></input>
-								</label>	
-							</div>
-							<button id="g1-btn-start" ng-click="game1.startGame1();" disabled>Старт</button>
-							<div>{{game1.status}}</div>
-							
-						</div>
-						
-					</div>
-					<div id="row2" class="flex-container flex-align-center flex-justify-around">
-						<div id="btn-black" class="btn" ng-click="game1.blackClick();"></div>
-						<div id="btn-white" class="btn" ng-click="game1.whiteClick();"></div>
-					</div>
-				</div>
-				
-				<!-- GAME Good & Evil -->
-				<div data-tab='tab2'id="GE" ng-controller="game2Controller as game2">
-					
-					<div id="GE-row0"></div>
-					
-					<div id="GE-row1" class="flex-container flex-column flex-align-stretch">
-						<div id="head" class="flex-container">
-							<div class="col-4">Добро</div>							
-							<div class="col-4"><button id="g2-btn-start" ng-click='game2.startGame2();'>СТАРТ</button></div>
-							<div class="col-4">Зло</div>
-						</div>
-						<div class="flex-container">
-							<div class="col-4">
-								<div id="goodNumber" class="number">{{game2.goodNumber}}</div>
-							</div>
-							<div class="col-4">&lt -- Загаданно -- &gt </div>
-							<div class="col-4">
-								<div id="evilNumber" class="number">{{game2.evilNumber}}</div>
-							</div>
-						</div>
-						<div class="flex-container">
-							<div class="col-4">
-								<div id="goodGuess" class="number">{{game2.goodGuess}}</div>
-							</div>
-							<div class="col-4">&lt -- Угаданно -- &gt </div>
-							<div class="col-4">
-								<div id="evilGuess" class="number">{{game2.evilGuess}}</div>
-							</div>
-						</div>
-					</div>
-					
-					<div id="GE-row2" class="flex-container flex-align-stretch">
-						<div class="col-5 keyboard flex-container">
-							<button id="G-key-1" class="col-4" ng-click="game2.keyClick(true,1);">1</button>
-							<button id="G-key-2" class="col-4" ng-click="game2.keyClick(true,2);">2</button>
-							<button id="G-key-3" class="col-4" ng-click="game2.keyClick(true,3);">3</button>
-							<button id="G-key-4" class="col-4" ng-click="game2.keyClick(true,4);">4</button>
-							<button id="G-key-5" class="col-4" ng-click="game2.keyClick(true,5);">5</button>
-							<button id="G-key-6" class="col-4" ng-click="game2.keyClick(true,6);">6</button>
-							<button id="G-key-7" class="col-4" ng-click="game2.keyClick(true,7);">7</button>
-							<button id="G-key-8" class="col-4" ng-click="game2.keyClick(true,8);">8</button>
-							<button id="G-key-9" class="col-4" ng-click="game2.keyClick(true,9);">9</button>
-							<button id="G-key-0" class="col-4" ng-click="game2.keyClick(true,0);">0</button>
-							<button id="G-key-cancel" class="col-8" ng-click="game2.keyClick(true,-1);">Отмена</button>							
-						</div>
-						<div class="col-2"><button id="GE-ok" ng-click="game2.btnOkClick();">OK</button></div>
-						<div class="col-5 keyboard flex-container">
-							<button id="E-key-1" class="col-4" ng-click="game2.keyClick(false,1);">1</button>
-							<button id="E-key-2" class="col-4" ng-click="game2.keyClick(false,2);">2</button>
-							<button id="E-key-3" class="col-4" ng-click="game2.keyClick(false,3);">3</button>
-							<button id="E-key-4" class="col-4" ng-click="game2.keyClick(false,4);">4</button>
-							<button id="E-key-5" class="col-4" ng-click="game2.keyClick(false,5);">5</button>
-							<button id="E-key-6" class="col-4" ng-click="game2.keyClick(false,6);">6</button>
-							<button id="E-key-7" class="col-4" ng-click="game2.keyClick(false,7);">7</button>
-							<button id="E-key-8" class="col-4" ng-click="game2.keyClick(false,8);">8</button>
-							<button id="E-key-9" class="col-4" ng-click="game2.keyClick(false,9);">9</button>
-							<button id="E-key-0" class="col-4" ng-click="game2.keyClick(false,0);">0</button>
-							<button id="E-key-cancel" class="col-8" ng-click="game2.keyClick(false,-1);">Отмена</button>							
-						</div>
-					</div>
-					
-				</div>
-				
-				
-			</div>
-		</div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles/app.css">
+  <link rel="stylesheet" href="src/game1/game1.css">
+  <link rel="stylesheet" href="src/game2/game2.css">
+  <link rel="stylesheet" href="src/game3/game3.css">
+  <!-- Libs -->
 
-	</body>
+  <!-- bootstrap CDN-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
+  <script src="lib/jquery-3.1.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+  <title>Tabs experiments</title>
+</head>
+<body ng-app="MakushimoGames">
+  <div class="row text-center">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <div class="card text-center">
+        <div class="card-header">
+          <nav class="navbar navbar-toggleable-md">
+            <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+              <li ui-sref="tab1" ui-sref-active="active" class="nav-item btn btn-outline-warning">
+                <a class="nav-link">Черное и белое</a>
+              </li>
+              <li ui-sref="tab2" ui-sref-active="active" class="nav-item btn btn-outline-warning">
+                <a class="nav-link">Добро и зло</a>
+              </li>
+              <li ui-sref="tab3" ui-sref-active="active" class="nav-item btn btn-outline-warning">
+                <a class="nav-link">2048</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Tabs content -->
+        <div id="tabsContent" class="bg-red card-block">
+          <ui-view></ui-view>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <!-- Libs -->
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/angular-ui-router.min.js"></script>
+  <!-- GAME 1 -->
+  <script src="src/game1/game1.module.js"></script>
+  <script src="src/game1/game1.controller.js"></script>
+  <!-- GAME 2 -->
+  <script src="src/game2/game2.module.js"></script>
+  <script src="src/game2/game2.controller.js"></script>
+  <!-- GAME 3 -->
+  <script src="src/game3/game3.module.js"></script>
+  <script src="src/game3/game3.controller.js"></script>
+  <!-- main app -->
+  <script src="src/app.js"></script>
+</body>
 </html>
-
-
-
-

@@ -1,0 +1,50 @@
+<div id="BW" ng-controller="Game1Controller as g1Ctrl" class="bg-game d-flex flex-column">
+  <div id="row1" class="h-75 d-flex">
+
+    <div id="left" class="h-100 col-sm-3 d-flex flex-column align-items-center justify-content-around">
+      <table>
+        <tr>
+          <td>Верно</td>
+          <td>{{g1Ctrl.correctCount}}</td>
+        </tr>
+        <tr>
+          <td>Не верно</td>
+          <td>{{g1Ctrl.uncorrectCount}}</td>
+        </tr>
+        <tr>
+        <td>Результат &nbsp &nbsp </td>
+          <td>{{g1Ctrl.resultCount}}</td>
+        </tr>
+      </table>
+      <div id="guess">Угадай, какой цвет сейчас будет.</div>
+    </div>
+
+    <div id="center" class="h-100 col-sm-6 d-flex flex-column align-items-center justify-content-center">
+      <div id="used" class="w-100">{{g1Ctrl.used}}</div>
+      <div id="result" ng-click="g1Ctrl.resultClick();" class="bg-grey">
+        <div>{{g1Ctrl.result}}</div>
+        <div id="rightWrong" ng-show="g1Ctrl.rightWrong != ''">
+          <img ng-src="{{g1Ctrl.rightWrong}}">
+        </div>
+      </div>
+
+    </div>
+
+    <div id="right" class="h-100 col-sm-3 d-flex flex-column align-items-center justify-content-around">
+      <div>
+        <label for="atepmpts">Всего попыток
+          <input id="atempts" class="number" type="number" ng-change="g1Ctrl.atemptsOnChange();" ng-model="g1Ctrl.atempts"></input>
+        </label>
+      </div>
+      <button id="g1-btn-start" ng-click="g1Ctrl.startGame1();" disabled class="w-75 h-25 btn">Старт</button>
+      <div>{{g1Ctrl.status}}</div>
+    </div>
+
+  </div>
+
+  <div id="row2" class="h-25 d-flex align-items-center justify-content-around">
+    <div id="btn-black" class="bw-btn btn h-75 w-25 bg-black" ng-click="g1Ctrl.blackClick();"></div>
+    <div id="btn-white" class="bw-btn btn h-75 w-25 bg-white" ng-click="g1Ctrl.whiteClick();"></div>
+  </div>
+
+</div>

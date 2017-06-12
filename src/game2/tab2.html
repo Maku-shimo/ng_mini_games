@@ -1,0 +1,60 @@
+<div id="GE" ng-controller="Game2Controller as g2Ctrl" class="bg-game">
+
+  <div id="GE-row1" class="h-25 d-flex flex-column align-items-stretch">
+    <div id="head" class="d-flex">
+      <div class="col-4">Добро</div>
+      <div class="col-4 w-50 h-100"><button id="g2-btn-start" ng-click="g2Ctrl.startGame();">СТАРТ</button></div>
+      <div class="col-4">Зло</div>
+    </div>
+    <div class="d-flex">
+      <div class="col-4">
+        <div id="goodNumber" class="number">{{g2Ctrl.goodNumber}}</div>
+      </div>
+      <div class="col-4">&lt -- Загаданно -- &gt </div>
+      <div class="col-4">
+        <div id="evilNumber" class="number">{{g2Ctrl.evilNumber}}</div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-4">
+        <div id="goodGuess" class="number">{{g2Ctrl.goodGuess}}</div>
+      </div>
+      <div class="col-4">&lt -- Угаданно -- &gt </div>
+      <div class="col-4">
+        <div id="evilGuess" class="number">{{g2Ctrl.evilGuess}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="GE-row2" class="h-75 d-flex align-items-stretch">
+    <div class="col-5 keyboard d-flex flex-wrap">
+      <button id="G-key-1" class="col-4" ng-click="g2Ctrl.keyClick(true,1);">1</button>
+      <button id="G-key-2" class="col-4" ng-click="g2Ctrl.keyClick(true,2);">2</button>
+      <button id="G-key-3" class="col-4" ng-click="g2Ctrl.keyClick(true,3);">3</button>
+      <button id="G-key-4" class="col-4" ng-click="g2Ctrl.keyClick(true,4);">4</button>
+      <button id="G-key-5" class="col-4" ng-click="g2Ctrl.keyClick(true,5);">5</button>
+      <button id="G-key-6" class="col-4" ng-click="g2Ctrl.keyClick(true,6);">6</button>
+      <button id="G-key-7" class="col-4" ng-click="g2Ctrl.keyClick(true,7);">7</button>
+      <button id="G-key-8" class="col-4" ng-click="g2Ctrl.keyClick(true,8);">8</button>
+      <button id="G-key-9" class="col-4" ng-click="g2Ctrl.keyClick(true,9);">9</button>
+      <button id="G-key-0" class="col-4" ng-click="g2Ctrl.keyClick(true,0);">0</button>
+      <button id="G-key-cancel" class="col-8" ng-click="g2Ctrl.keyClick(true,-1);">Отмена</button>
+    </div>
+    <div class="col-2 w-50 h-50"><button id="GE-ok" ng-click="g2Ctrl.btnOkClick();">OK</button></div>
+    <div class="col-5 keyboard d-flex flex-wrap">
+      <button id="E-key-1" class="col-4" ng-click="g2Ctrl.keyClick(false,1);">1</button>
+      <button id="E-key-2" class="col-4" ng-click="g2Ctrl.keyClick(false,2);">2</button>
+      <button id="E-key-3" class="col-4" ng-click="g2Ctrl.keyClick(false,3);">3</button>
+      <button id="E-key-4" class="col-4" ng-click="g2Ctrl.keyClick(false,4);">4</button>
+      <button id="E-key-5" class="col-4" ng-click="g2Ctrl.keyClick(false,5);">5</button>
+      <button id="E-key-6" class="col-4" ng-click="g2Ctrl.keyClick(false,6);">6</button>
+      <button id="E-key-7" class="col-4" ng-click="g2Ctrl.keyClick(false,7);">7</button>
+      <button id="E-key-8" class="col-4" ng-click="g2Ctrl.keyClick(false,8);">8</button>
+      <button id="E-key-9" class="col-4" ng-click="g2Ctrl.keyClick(false,9);">9</button>
+      <button id="E-key-0" class="col-4" ng-click="g2Ctrl.keyClick(false,0);">0</button>
+      <button id="E-key-cancel" class="col-8" ng-click="g2Ctrl.keyClick(false,-1);">Отмена</button>
+    </div>
+  </div>
+
+
+</div>

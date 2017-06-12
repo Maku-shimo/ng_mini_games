@@ -1,0 +1,32 @@
+#GE {
+  height:100%;
+}
+
+#GE-row1{
+	text-align:center;
+	font-size: 1.4em;
+}
+#GE-row2 {
+	text-align:center;
+}
+#head { margin: 10px 0px; }
+div.number{ margin: auto; }
+.keyboard button{ font-size:2em; }
+
+.rightAnswer {
+	background-color:green;
+}
+
+.wrongAnswer{
+	background-color:red;
+}
+#g2-btn-start{
+	font-size: 1.1em;
+}
+
+#GE-ok {
+	margin:5px;
+	/*width:60px;*/
+	/*height:60px;*/
+	font-size: 1.6em;
+}
