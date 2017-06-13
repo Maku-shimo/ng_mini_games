@@ -1,4 +1,41 @@
 <div id="TZFE" ng-controller="Game3Controller as g3Ctrl" class="bg-green ">
-  {{g3Ctrl.text}}
+  <!-- <div id="content" ng-controller='GameController as ctrl'> -->
+
+  			<div id="heading" class="row">
+  				<h1 class="title">2048</h1>
+  				<div class="scores-container">
+  					<div class="score-container">{{g3Ctrl.game.currentScore}}</div>
+  					<div class="best-container">{{g3Ctrl.game.highScore}}</div>
+  				</div>
+  			</div>
+
+  			<div id="instructions" class="row">
+  				Складывай плитки пока не получишь <strong>2048</strong> !
+  			<button ng-click="g3Ctrl.newGame()" class="restart-button">Новая игра</button>
+  			</div>
+
+  			<div id="game-container">
+
+  				<div grid ng-model="g3Ctrl.game" class="row"></div>
+
+  				<div id="game-over" ng-if="g3Ctrl.game.gameOver" class="row game-overlay">
+  				  Game over
+
+  				  <div class="lower">
+  					<a class="retry-button" ng-click="g3Ctrl.newGame()">Заново</a>
+  				  </div>
+  				</div>
+
+  				<div id="win" ng-if="g3Ctrl.game.win" class="row game-overlay">
+  				  You win!
+
+  				  <div class="lower">
+  					<a class="retry-button" ng-click="g3Ctrl.newGame()">Try again</a>
+  				  </div>
+  				</div>
+
+  			</div>
+
+  		<!-- </div> -->
 
 </div>
