@@ -1,7 +1,7 @@
-<div id="TZFE" ng-controller="Game3Controller as g3Ctrl" class="bg-green ">
-  <!-- <div id="content" ng-controller='GameController as ctrl'> -->
+<div id="TZFE" ng-controller="Game3Controller as g3Ctrl" class="bg-game">
+  <!-- <div id="content" class="border-white bg-blue"> -->
 
-  			<div id="heading" class="row">
+  			<div id="heading" class="d-flex justify-content-end">
   				<h1 class="title">2048</h1>
   				<div class="scores-container">
   					<div class="score-container">{{g3Ctrl.game.currentScore}}</div>
@@ -9,28 +9,28 @@
   				</div>
   			</div>
 
-  			<div id="instructions" class="row">
-  				Складывай плитки пока не получишь <strong>2048</strong> !
-  			<button ng-click="g3Ctrl.newGame()" class="restart-button">Новая игра</button>
+  			<div id="instructions" class="d-flex justify-content-end">
+  				<div>Складывай плитки пока не получишь <strong>2048</strong> !</div>
+  			  <button ng-click="g3Ctrl.newGame()" class="restart-button">Новая игра</button>
   			</div>
 
-  			<div id="game-container">
+  			<div id="game-container" class="border-black">
 
   				<div grid ng-model="g3Ctrl.game" class="row"></div>
 
-  				<div id="game-over" ng-if="g3Ctrl.game.gameOver" class="row game-overlay">
-  				  Game over
+  				<div id="game-over" ng-if="g3Ctrl.game.gameOver" class="game-overlay">
+  				  Конец игры
 
   				  <div class="lower">
-  					<a class="retry-button" ng-click="g3Ctrl.newGame()">Заново</a>
+  					  <a class="retry-button" ng-click="g3Ctrl.newGame()">Заново</a>
   				  </div>
   				</div>
 
-  				<div id="win" ng-if="g3Ctrl.game.win" class="row game-overlay">
-  				  You win!
+  				<div id="win" ng-if="g3Ctrl.game.win" class="game-overlay">
+  				  Ты выиграл!
 
   				  <div class="lower">
-  					<a class="retry-button" ng-click="g3Ctrl.newGame()">Try again</a>
+  					  <a class="retry-button" ng-click="g3Ctrl.newGame()">Еще разок</a>
   				  </div>
   				</div>
 
