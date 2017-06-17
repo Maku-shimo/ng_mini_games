@@ -7,9 +7,9 @@ GameManager.$inject = ['GridService','$cookieStore'];
 function GameManager(GridService, $cookieStore) {
 
   var game = this;
-  game.grid 			   = GridService.grid;
-	game.tiles 			   = GridService.tiles;
-	game.winningValue  = 2048;
+  game.grid 		 = GridService.grid;
+  game.tiles 		 = GridService.tiles;
+  game.winningValue  = 2048;
 
   // получает из кеша браузера ранее значение highScore
   game.getHighScore = function() {
@@ -29,8 +29,8 @@ function GameManager(GridService, $cookieStore) {
   // сбрасывает состояние игры
 	game.reinit = function() {
 		game.gameOver 		  = false;
-		game.win 			      = false;
-		game.currentScore 	= 0;
+		game.win 			  = false;
+		game.currentScore 	  = 0;
 		game.highScore 		  = game.getHighScore();
 	};
 
@@ -54,18 +54,19 @@ function GameManager(GridService, $cookieStore) {
    */
 	game.move = function(key){
 		var self = game;
-    console.log(key);
-		// if (self.win){return false;}
-    //
-		// var positions 	= GridService.traversalDirections(key);
-		// var hasWon 		  = false;
-		// var hasMoved 	  = false;
-    //
-		// // обнулим сведения об объединениях с предыдущего хода
-		// GridService.prepareTiles();
-    //
-		// positions.x.forEach(function(x) {
-		// 	positions.y.forEach(function(y) {
+
+		if (self.win){return false;}
+
+		var positions 	= GridService.traversalDirections(key);
+		var hasWon 			= false;
+		var hasMoved 		= false;
+
+		// обнулим сведения об объединениях с предыдущего хода
+		GridService.prepareTiles();
+
+		positions.x.forEach(function(x) {
+			positions.y.forEach(function(y) {
+				// console.log("x:",x,"y:",y);
 		// 		var originalPosition = {x:x,y:y};
 		// 		var tile = GridService.getCellAt(originalPosition);
     //
@@ -111,10 +112,10 @@ function GameManager(GridService, $cookieStore) {
 		// 			  hasMoved = true;
 		// 			}
 		// 		}
-		// 	}); // for y
-		// }); // for x
-    //
-		// // если выиграли по очкам, возможим общий флаг win
+		 	}); // for y
+		 }); // for x
+
+	  // если выиграли по очкам, возможим общий флаг win
 		// if (hasWon && !self.win) {
 		// 	self.win = true;
 		// }
@@ -127,7 +128,7 @@ function GameManager(GridService, $cookieStore) {
 		// 	// игра окончвена, если нет возможных движений или есть выигрыша по очкам
 		// 	if (self.win || !self.movesAvailable()) {
 		// 		self.gameOver = true;
-		// 	}
+			//  }
 		// }
 	}; // move
 

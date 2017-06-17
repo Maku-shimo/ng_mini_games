@@ -4,9 +4,17 @@
     <div class="grid-cell" ng-repeat="cell in ngModel.grid track by $index"></div>
   </div>
 
-  <!-- <div class="tile-container">
-    <div tile
+  <div class="tile-container">
+    <!-- <div tile
           ng-model='tile'
-          ng-repeat='tile in ngModel.tiles track by $id(tile.id || $index)'></div>
-  </div> -->
+          ng-repeat='tile in ngModel.tiles track by $id(tile.id || $index)'></div> -->
+    <div ng-if='tile' ng-repeat='tile in ngModel.tiles track by $id(tile.id || $index)'
+         class="tile position-{{ tile.x }}-{{ tile.y }} tile-{{ tile.value }}"
+         ng-class="{ 'tile-merged': tile.merged}">
+
+      <div class="tile-inner">
+        {{ tile.value }}
+      </div>
+    </div>
+  </div>
 </div>

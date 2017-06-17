@@ -63,7 +63,6 @@ function GridService(){
   		_provider.size = sz ? sz : 0;
   };
 
-  // _provider.$get = function(TileModel){
 	_provider.$get = ['TileModel',function(TileModel){
     var gridSrv = this;
     gridSrv.grid  =[];
@@ -74,6 +73,10 @@ function GridService(){
 			'right':{x: 1,  y: 0},
 			'up':	  {x: 0,  y: -1},
 			'down':	{x: 0,  y: 1}
+		};
+
+		gridSrv.getSize = function() {
+			return service.size;
 		};
 
     // забиваем массивы grid и tiles нулями
@@ -98,12 +101,12 @@ function GridService(){
       for (var x = 0; x < _provider.startingTileNumber; x++) {
     	   gridSrv.randomlyInsertNewTile();
       }
-    };
+			console.log("gridSrv.tiles",gridSrv.tiles);
+    };//buildStartingPosition
 
     // Это функция цикл по всем плиткам массива tiles
 		// cb - это колбэк - функция, которую нужно применить над каждым элементом
 		gridSrv.forEach = function(cb) {
-		  //var totalSize = _provider.size * _provider.size;
 		  for (var i = 0; i < _provider.size * _provider.size; i++) {
 			     var pos = gridSrv._positionToCoordinates(i);
 			     cb(pos.x, pos.y, gridSrv.tiles[i]);
@@ -150,7 +153,7 @@ function GridService(){
 		// должны быть от 0 до 4 каждое
 		gridSrv.withinGrid = function(cell) {
 		  return cell.x >= 0 && cell.x < _provider.size &&
-				     cell.y >= 0 && cell.y < _provider.size;
+				 cell.y >= 0 && cell.y < _provider.size;
 		};
 
     // случайным образом вставляет новую плитку
@@ -172,32 +175,66 @@ function GridService(){
 		// и вернем их позиции массивом
 		gridSrv.availablePoss = function() {
 		  var freePoss = [],
-			    self = gridSrv;
-
+		    self = gridSrv;
 		  // в цикле по всем возможным плиткам
 		  // найдем все нулевые (null)
 		  //
 		  gridSrv.forEach(function(x,y) {
-			  var foundTile = self.getTileAt({x:x, y:y});
-			  if (!foundTile) {
-			     freePoss.push({x:x,y:y});
-			  }
-		  });
-		  return freePoss;
+	  	    var foundTile = self.getTileAt({x:x, y:y});
+				if (!foundTile) {
+					freePoss.push({x:x,y:y});
+				}
+			});
+			return freePoss;
 		}; // availablePoss
 
-    // возвращает новый экземпляр TileModel
-    gridSrv.newTile = function(pos, value) {
-      return new TileModel(pos, value);
-    };
+	  // возвращает новый экземпляр TileModel
+	  gridSrv.newTile = function(pos, value) {
+	    return new TileModel(pos, value);
+	  };
 
-    // вставляет плитку на указанное место в массиве плиток
+	  // вставляет плитку на указанное место в массиве плиток
 		gridSrv.insertTile = function(tile) {
-		  var pos = gridSrv._coordinatesToPosition(tile);
-		  gridSrv.tiles[pos] = tile;
+	  	var pos = gridSrv._coordinatesToPosition(tile);
+	  	gridSrv.tiles[pos] = tile;
 		};
 
-    return gridSrv;
+		// выдает массивы координат x и y, отсортированными
+		// в зависимости от вектора движения
+		gridSrv.traversalDirections = function(key) {
+		  // получили вектор по переданной кнопке
+		  var vector = vectors[key];
+		  // наполняем массивы
+		  var positions = {x: [], y: []};
+		  for (var x = 0; x < this.size; x++) {
+			positions.x.push(x);
+			positions.y.push(x);
+		  }
+			// изменим сортировку элементов в зависимости от направления движения
+		  if (vector.x > 0) {
+			positions.x = positions.x.reverse();
+		  }
+		  if (vector.y > 0) {
+			positions.y = positions.y.reverse();
+		  }
+
+		  return positions;
+		};
+
+		gridSrv.prepareTiles = function() {
+				  gridSrv.forEach(function(x,y,tile) {
+						// если на этой позиции есть плитка
+						if (tile) {
+							// сохраним ее текущие координаты
+						  tile.savePosition();
+							// сбросим признак объединения (merged)
+						  tile.reset();
+						}
+				  });// forEach
+		};// prepareTiles
+
+
+		return gridSrv;
   }];
 
 }
