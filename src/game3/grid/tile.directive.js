@@ -5,11 +5,12 @@ angular.module('Grid')
 
 function tileDirective(){
 	var ddo = {
-		// restrict: 'A',
-		// scope:{
-		// 	ngModel: '='
-		// },
-		// templateUrl:'src/game3/grid/tile.html'
+		restrict: 'A',
+		scope:{
+			// ngModel: '='
+			tile: '=ngModel'
+		},
+		templateUrl:'src/game3/grid/tile.html'
 	}
 	return ddo;
 }

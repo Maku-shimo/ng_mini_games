@@ -151,9 +151,9 @@ function GridService(){
     // проверяет, присутствует ли x/y в сетке
 		// т.е если сетка 4 х 4, тогда значения x и y
 		// должны быть от 0 до 4 каждое
-		gridSrv.withinGrid = function(cell) {
-		  return cell.x >= 0 && cell.x < _provider.size &&
-				 cell.y >= 0 && cell.y < _provider.size;
+		gridSrv.withinGrid = function(pos) {
+		  return pos.x >= 0 && pos.x < _provider.size &&
+				 		 pos.y >= 0 && pos.y < _provider.size;
 		};
 
     // случайным образом вставляет новую плитку
@@ -195,8 +195,8 @@ function GridService(){
 
 	  // вставляет плитку на указанное место в массиве плиток
 		gridSrv.insertTile = function(tile) {
-	  	var pos = gridSrv._coordinatesToPosition(tile);
-	  	gridSrv.tiles[pos] = tile;
+	  	var index = gridSrv._coordinatesToPosition(tile);
+	  	gridSrv.tiles[index] = tile;
 		};
 
 		// выдает массивы координат x и y, отсортированными
@@ -221,6 +221,8 @@ function GridService(){
 		  return positions;
 		};
 
+		// подготовим все плитки на всех позициях (если есть)
+		// для следующего хода
 		gridSrv.prepareTiles = function() {
 				  gridSrv.forEach(function(x,y,tile) {
 						// если на этой позиции есть плитка
@@ -233,6 +235,75 @@ function GridService(){
 				  });// forEach
 		};// prepareTiles
 
+		// возвращает новую позицию для плитки
+		// и следующую за ней плитку
+		gridSrv.calculateNextPosition = function(pos, key) {
+		  var vector = vectors[key];
+		  var previous;
+			// в цикле, начиная с текущей позиции pos смещаемся на один шаг по вектору
+			// и смотрим, есть ли на следующей клетке плитка
+		  do {
+				previous = pos;
+				pos = {
+				  x: previous.x + vector.x,
+				  y: previous.y + vector.y
+				};
+		  } while (gridSrv.withinGrid(pos) && gridSrv.positionAvailable(pos));
+
+		  return {
+				newPosition: previous,
+				next: gridSrv.getTileAt(pos)
+		  };
+		};
+
+		// Проверяет, принадлежит ли сетке проверяемая плитка
+		// и нет ли на позиции какой-нибудь плитки
+		gridSrv.positionAvailable = function(pos) {
+		  if (gridSrv.withinGrid(pos)) {
+				// истина, если плитки тут нет
+				return !gridSrv.getTileAt(pos);
+			} else {
+				return null;
+			}
+		};//positionAvailable
+
+		// удаляет плитку из массива плиток
+	 	gridSrv.removeTile = function(pos) {
+	 	  var index = gridSrv._coordinatesToPosition(pos);
+	 	  delete gridSrv.tiles[index];
+	 	};
+
+		// двигает плитку на новую позицию в массиве
+		gridSrv.moveTile = function(tile, newPosition) {
+			var oldPos = {
+				x: tile.x,
+				y: tile.y
+			};
+
+			// обнуляем старую позицию
+			gridSrv.setTileAt(oldPos, null);
+			// вставляем плитку на новую позицию
+			gridSrv.setTileAt(newPosition, tile);
+
+			// обновим значения	 x и y в самой плитке
+		  tile.updatePosition(newPosition);
+
+		}; //moveTile
+
+		// Проверяет одинаковые ли позиции у a и b
+		gridSrv.samePositions = function(a, b) {
+		  return a.x === b.x && a.y === b.y;
+		}; //samePositions
+
+		gridSrv.anyCellsAvailable = function () {
+			// заглушка
+			return true;
+		}
+
+		gridSrv.tileMatchesAvailable = function () {
+			// заглушка
+			return true;
+		}
 
 		return gridSrv;
   }];

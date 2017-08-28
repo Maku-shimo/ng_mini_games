@@ -1,7 +1,11 @@
 (function () {
   'use strict';
 
-  angular.module("MakushimoGames",['ui.router','Game1','Game2','Game3']);
+  angular.module("MakushimoGames",['ui.router',
+                                  'Game1',
+                                  'Game2',
+                                  //'Game3'
+                                  ]);
 
   angular.module("MakushimoGames")
     .config(RoutesConfig);
@@ -18,11 +22,11 @@
       .state('tab2',{
         url:'/tab2',
         templateUrl: 'src/game2/tab2.html'
-      })
-      .state('tab3',{
-        url:'/tab3',
-        templateUrl: 'src/game3/tab3.html'
       });
+      //.state('tab3',{
+      //  url:'/tab3',
+      //  templateUrl: 'src/game3/tab3.html'
+      //});
   }
 
   

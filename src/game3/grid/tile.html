@@ -5,3 +5,11 @@
     {{ ngModel.value }}
   </div>
 </div> -->
+
+<div ng-if='tile' class="tile position-{{ tile1.x }}-{{ tile1.y }} tile-{{ tile1.value }}"
+     ng-class="{ 'tile-merged': tile1.merged}">
+
+  <div class="tile-inner">
+    {{ tile1.value }}
+  </div>
+</div>
